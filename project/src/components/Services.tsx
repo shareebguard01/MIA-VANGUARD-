@@ -37,9 +37,9 @@ const SERVICES = [
 ];
 
 const accentMap: Record<string, { glow: string; text: string; border: string; bg: string }> = {
-  gold: { glow: 'group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]', text: 'text-gold', border: 'group-hover:border-gold/40', bg: 'bg-gold/10' },
-  cyan: { glow: 'group-hover:shadow-[0_0_30px_rgba(34,211,238,0.12)]', text: 'text-cyan-glow', border: 'group-hover:border-cyan-glow/40', bg: 'bg-cyan-glow/10' },
-  emerald: { glow: 'group-hover:shadow-[0_0_30px_rgba(16,185,129,0.12)]', text: 'text-emerald-glow', border: 'group-hover:border-emerald-glow/40', bg: 'bg-emerald-glow/10' },
+  gold: { glow: 'group-hover:shadow-[0_0_30px_rgba(212,175,55,0.15)]', text: 'text-gold', border: 'group-hover:border-gold/50', bg: 'bg-gold/10' },
+  cyan: { glow: 'group-hover:shadow-[0_0_30px_rgba(212,175,55,0.12)]', text: 'text-cyan-glow', border: 'group-hover:border-gold/50', bg: 'bg-cyan-glow/10' },
+  emerald: { glow: 'group-hover:shadow-[0_0_30px_rgba(212,175,55,0.12)]', text: 'text-emerald-glow', border: 'group-hover:border-gold/50', bg: 'bg-emerald-glow/10' },
 };
 
 export default function Services() {

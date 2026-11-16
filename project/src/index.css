@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,38 +7,50 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px;
+    scroll-padding-top: 88px;
   }
   body {
-    @apply bg-obsidian text-slate-light font-sans antialiased;
-    background-color: #0A0D12;
+    @apply bg-navy text-slate-light font-sans antialiased;
+    background-color: #0a0d12;
   }
   h1, h2, h3, h4 {
     @apply font-display font-semibold tracking-tight;
+  }
+  ::selection {
+    background: rgba(212, 175, 55, 0.35);
+    color: #fff;
   }
 }
 
 @layer utilities {
   .text-gold-gradient {
-    @apply bg-gold-gradient bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #e6c757 0%, #d4af37 45%, #b8941f 100%);
     background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background: rgba(17, 22, 32, 0.72);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
   .glass-card {
     @apply bg-card/80 backdrop-blur-xl border border-white/[0.06] rounded-2xl;
   }
   .gold-border {
-    border-image: linear-gradient(135deg, rgba(212,175,55,0.6), rgba(212,175,55,0.1), rgba(212,175,55,0.4)) 1;
+    border-image: linear-gradient(135deg, rgba(212, 175, 55, 0.6), rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.4)) 1;
   }
   .glow-gold {
-    box-shadow: 0 0 40px rgba(212,175,55,0.15), 0 0 80px rgba(212,175,55,0.08);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.15), 0 0 80px rgba(212, 175, 55, 0.08);
   }
   .glow-cyan {
-    box-shadow: 0 0 40px rgba(34,211,238,0.12), 0 0 80px rgba(34,211,238,0.06);
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.12), 0 0 80px rgba(34, 211, 238, 0.06);
   }
   .grid-bg {
     background-image:
-      linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 }
@@ -46,41 +60,58 @@
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0D12;
+  background: #0a0d12;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #D4AF37, #A8861F);
+  background: linear-gradient(180deg, #e6c757, #b8941f);
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: #d4af37;
+}
+
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor select,
+  html.has-custom-cursor label {
+    cursor: none !important;
+  }
+  html.has-custom-cursor :focus-visible {
+    outline: 2px solid #d4af37;
+    outline-offset: 3px;
+  }
 }
 
 /* Range slider styling */
-input[type="range"] {
+input[type='range'] {
   -webkit-appearance: none;
   appearance: none;
   height: 6px;
   border-radius: 3px;
-  background: linear-gradient(90deg, #D4AF37 var(--val, 50%), #1E2940 var(--val, 50%));
+  background: linear-gradient(90deg, #d4af37 var(--val, 50%), #1e2940 var(--val, 50%));
   outline: none;
 }
-input[type="range"]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #E6C757, #D4AF37);
+  background: linear-gradient(135deg, #e6c757, #d4af37);
   cursor: pointer;
-  box-shadow: 0 0 12px rgba(212,175,55,0.5);
-  border: 2px solid #0A0D12;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+  border: 2px solid #0a0d12;
 }
-input[type="range"]::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #E6C757, #D4AF37);
+  background: linear-gradient(135deg, #e6c757, #d4af37);
   cursor: pointer;
-  border: 2px solid #0A0D12;
+  border: 2px solid #0a0d12;
 }

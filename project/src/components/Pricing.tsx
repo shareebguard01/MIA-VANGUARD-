@@ -146,7 +146,7 @@ export default function Pricing() {
               className={`relative rounded-2xl p-6 sm:p-8 flex flex-col transition-all duration-500 ${
                 tier.featured
                   ? 'bg-gradient-to-b from-gold/10 to-card/80 border border-gold/30 shadow-[0_0_40px_rgba(212,175,55,0.08)] lg:scale-[1.03] lg:-mt-4 lg:mb-4'
-                  : 'bg-card/60 border border-white/[0.06] hover:border-white/15'
+                  : 'bg-card/60 border border-white/[0.06] hover:border-gold/50'
               }`}
             >
               {tier.popular && (
@@ -207,7 +207,7 @@ export default function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-6 relative rounded-2xl bg-card/60 border border-white/[0.06] hover:border-emerald-glow/20 transition-all duration-500 p-6 sm:p-8"
+          className="mt-6 relative rounded-2xl bg-card/60 border border-white/[0.06] hover:border-gold/50 transition-all duration-300 p-6 sm:p-8"
         >
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div className="flex items-start gap-4 flex-1">

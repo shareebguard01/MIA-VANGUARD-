@@ -134,7 +134,7 @@ Please send me a detailed proposal.`;
                           className={`w-full flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all ${
                             isSelected
                               ? 'bg-gold/10 border-gold/40'
-                              : 'bg-card-light/40 border-white/5 hover:border-white/15'
+                              : 'bg-card-light/40 border-white/5 hover:border-gold/40'
                           }`}
                         >
                           <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${isSelected ? 'bg-gold/20' : 'bg-white/5'}`}>
@@ -182,7 +182,7 @@ Please send me a detailed proposal.`;
                           className={`px-2 py-2.5 rounded-lg text-xs font-medium border transition-all ${
                             details.timeline === t
                               ? 'bg-gold/15 border-gold/40 text-gold'
-                              : 'bg-card-light/40 border-white/5 text-slate-light hover:border-white/15'
+                              : 'bg-card-light/40 border-white/5 text-slate-light hover:border-gold/40'
                           }`}
                         >
                           {t}

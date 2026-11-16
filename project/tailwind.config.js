@@ -4,14 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
+        navy: {
+          DEFAULT: '#0A0D12',
+          light: '#111620',
+        },
         obsidian: '#0A0D12',
         midnight: '#0F172A',
         card: '#161F30',
         'card-light': '#1E2940',
         gold: {
-          DEFAULT: '#D4AF37',
-          light: '#E6C757',
-          dark: '#A8861F',
+          DEFAULT: '#d4af37',
+          light: '#e6c757',
+          hover: '#e6c757',
+          dark: '#b8941f',
+          active: '#b8941f',
         },
         cyan: {
           glow: '#22D3EE',
@@ -31,8 +37,8 @@ export default {
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',
         'glow-pulse': 'glowPulse 4s ease-in-out infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'shimmer': 'shimmer 3s linear infinite',
+        float: 'float 6s ease-in-out infinite',
+        shimmer: 'shimmer 3s linear infinite',
         'gradient-shift': 'gradientShift 8s ease infinite',
       },
       keyframes: {
@@ -41,8 +47,14 @@ export default {
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         glowPulse: {
-          '0%, 100%': { opacity: '0.4' },
-          '50%': { opacity: '0.7' },
+          '0%, 100%': {
+            opacity: '0.45',
+            filter: 'drop-shadow(0 0 12px rgba(212,175,55,0.35))',
+          },
+          '50%': {
+            opacity: '1',
+            filter: 'drop-shadow(0 0 28px rgba(212,175,55,0.75))',
+          },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0)' },
@@ -58,7 +70,7 @@ export default {
         },
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #E6C757 50%, #D4AF37 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #d4af37 0%, #e6c757 50%, #b8941f 100%)',
         'radial-gold': 'radial-gradient(ellipse at center, rgba(212,175,55,0.15) 0%, transparent 70%)',
       },
     },

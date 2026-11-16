@@ -63,7 +63,7 @@ I'd like to discuss how your AI automations can deliver these savings for my bus
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.7 }}
-          className="relative rounded-3xl bg-card/80 border border-white/[0.08] backdrop-blur-xl overflow-hidden"
+          className="relative rounded-3xl bg-card/80 border border-white/[0.08] backdrop-blur-xl overflow-hidden transition-all duration-300 hover:border-gold/40"
         >
           <div className="absolute inset-0 grid-bg opacity-20" />
           <div className="relative grid lg:grid-cols-2 gap-8 p-6 sm:p-10">

@@ -1,64 +1,106 @@
-import { Zap, MessageCircle, Mail, MapPin, ArrowUp } from 'lucide-react';
-import { BUSINESS_EMAIL, BUSINESS_ADDRESS, BUSINESS_PHONE_DISPLAY, buildWhatsAppLink } from '@/lib/constants';
+import { useState, type FormEvent } from 'react';
+import { ArrowUp, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
+import { BUSINESS_ADDRESS, BUSINESS_EMAIL, BUSINESS_PHONE_DISPLAY, buildWhatsAppLink } from '@/lib/constants';
 
 const QUICK_LINKS = [
   { label: 'Services', href: '#services' },
+  { label: 'Process', href: '#process' },
   { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Results', href: '#testimonials' },
   { label: 'ROI Calculator', href: '#roi' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Contact', href: '#contact' },
 ];
 
+const SOCIALS = [
+  {
+    label: 'WhatsApp',
+    href: buildWhatsAppLink('Hello MIA Vanguard!'),
+    icon: MessageCircle,
+  },
+  {
+    label: 'Email',
+    href: `mailto:${BUSINESS_EMAIL}`,
+    icon: Mail,
+  },
+  {
+    label: 'Call',
+    href: 'tel:+27835546348',
+    icon: Phone,
+  },
+];
+
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [joined, setJoined] = useState(false);
+  const [error, setError] = useState('');
+
   const scrollTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  return (
-    <footer className="relative border-t border-white/5 bg-obsidian">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const trimmed = email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setError('Enter a valid email address.');
+      setJoined(false);
+      return;
+    }
+    setError('');
+    setJoined(true);
+    window.location.href = `mailto:${BUSINESS_EMAIL}?subject=${encodeURIComponent('MIA Vanguard briefing list')}&body=${encodeURIComponent(`Please add ${trimmed} to the MIA Vanguard briefing list.`)}`;
+  };
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-gold-gradient flex items-center justify-center">
-                <Zap className="w-5 h-5 text-obsidian" fill="currentColor" />
-              </div>
+  return (
+    <footer className="relative border-t border-gold/15 bg-navy">
+      <div className="absolute left-1/2 top-0 h-px w-[28rem] -translate-x-1/2 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <div className="mb-4 flex items-center gap-3">
+              <img src="/logo.png" alt="" className="h-12 w-12 rounded-full object-cover ring-1 ring-gold/40" />
               <div>
-                <span className="block font-display font-bold text-white text-lg leading-none tracking-wider">
-                  MIA <span className="text-gold-gradient">VANGUARD</span>
+                <span className="block font-display text-lg font-bold leading-none tracking-[0.14em] text-white">
+                  MIA <span className="text-gold">VANGUARD</span>
                 </span>
-                <span className="block text-[10px] text-slate-body tracking-[0.2em] uppercase mt-0.5">
+                <span className="mt-1 block text-[10px] uppercase tracking-[0.2em] text-slate-body">
                   AI Automation Agency
                 </span>
               </div>
             </div>
-            <p className="text-sm text-slate-body leading-relaxed max-w-sm mb-5">
-              The Future of Industry. Grounded in Excellence. We architect AI automation
-              systems and modern web platforms that scale your business 24/7.
+            <p className="mb-5 max-w-sm text-sm leading-relaxed text-slate-body">
+              The Future of Industry. Grounded in Excellence. AI automation, modern web architecture, and digital branding for ambitious businesses.
             </p>
-            <a
-              href={buildWhatsAppLink("Hi MIA Vanguard! I'd like to learn more about your services.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gold-gradient text-obsidian font-semibold text-sm hover:shadow-[0_0_20px_rgba(212,175,55,0.3)] transition-all"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Book Strategy Call
-            </a>
+            <div className="flex items-center gap-3">
+              {SOCIALS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    aria-label={item.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/25 text-gold transition-all duration-300 hover:border-gold hover:bg-gold hover:text-navy"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Quick links */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Navigate</h4>
+          <div className="lg:col-span-2">
+            <h4 className="mb-4 text-sm font-semibold text-white">Quick links</h4>
             <ul className="space-y-2.5">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href}>
                   <button
+                    type="button"
                     onClick={() => scrollTo(link.href)}
-                    className="text-sm text-slate-body hover:text-gold transition-colors"
+                    className="text-sm text-slate-body transition-colors duration-300 hover:text-gold"
                   >
                     {link.label}
                   </button>
@@ -67,43 +109,72 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Contact</h4>
+          <div className="lg:col-span-3">
+            <h4 className="mb-4 text-sm font-semibold text-white">Contact</h4>
             <ul className="space-y-3">
               <li>
-                <a href={buildWhatsAppLink('Hello MIA Vanguard!')} target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 text-sm text-slate-body hover:text-gold transition-colors">
-                  <MessageCircle className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
+                <a
+                  href={buildWhatsAppLink('Hello MIA Vanguard!')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-2 text-sm text-slate-body transition-colors duration-300 hover:text-gold"
+                >
+                  <MessageCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-gold" />
                   {BUSINESS_PHONE_DISPLAY}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${BUSINESS_EMAIL}`} className="flex items-start gap-2 text-sm text-slate-body hover:text-gold transition-colors">
-                  <Mail className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
+                <a href={`mailto:${BUSINESS_EMAIL}`} className="flex items-start gap-2 text-sm text-slate-body transition-colors duration-300 hover:text-gold">
+                  <Mail className="mt-0.5 h-4 w-4 flex-shrink-0 text-gold" />
                   <span className="break-all">{BUSINESS_EMAIL}</span>
                 </a>
               </li>
-              <li>
-                <div className="flex items-start gap-2 text-sm text-slate-body">
-                  <MapPin className="w-4 h-4 text-gold mt-0.5 flex-shrink-0" />
-                  {BUSINESS_ADDRESS}
-                </div>
+              <li className="flex items-start gap-2 text-sm text-slate-body">
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-gold" />
+                {BUSINESS_ADDRESS}
               </li>
             </ul>
           </div>
+
+          <div className="lg:col-span-3">
+            <h4 className="mb-4 text-sm font-semibold text-white">Briefing list</h4>
+            <p className="mb-4 text-sm leading-relaxed text-slate-body">
+              Occasional notes on automation, web systems, and how operators are scaling.
+            </p>
+            <form onSubmit={onSubmit} className="space-y-3">
+              <label htmlFor="briefing-email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="briefing-email"
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="you@company.com"
+                autoComplete="email"
+                className="w-full rounded-xl border border-white/10 bg-navy-light px-4 py-3 text-sm text-white transition-colors duration-300 placeholder:text-slate-body focus:border-gold/50 focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="w-full rounded-xl bg-gold px-4 py-3 text-sm font-semibold text-navy transition-colors duration-300 hover:bg-gold-hover active:bg-gold-active"
+              >
+                Join the list
+              </button>
+              {error && <p className="text-xs text-gold-hover">{error}</p>}
+              {joined && <p className="text-xs text-gold">Your mail app will send the request to MIA Vanguard.</p>}
+            </form>
+          </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-slate-body text-center sm:text-left">
-            Copyright 2026 MIA Vanguard. All Rights Reserved.
-          </p>
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-6 sm:flex-row">
+          <p className="text-center text-xs text-slate-body sm:text-left">© 2026 MIA Vanguard. All rights reserved.</p>
           <button
+            type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex items-center gap-1.5 text-xs text-slate-body hover:text-gold transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-body transition-colors duration-300 hover:text-gold"
           >
             Back to top
-            <ArrowUp className="w-3.5 h-3.5" />
+            <ArrowUp className="h-3.5 w-3.5" />
           </button>
         </div>
       </div>
